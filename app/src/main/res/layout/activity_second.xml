@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sys2017.android_app_test.SecondActivity"
+    android:clickable="true"
+    android:onClick="clickBackground"
+    android:padding="5dp"
+    android:background="#fffafa"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/textView_memo"
+                android:text="memo : "
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textView_date"
+                android:text="date : "
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/circular_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6.30"
+            android:src="@drawable/mjy_sys"
+            app:civ_shadow="false"
+            android:layout_margin="40dp"/>
+
+        <com.sys2017.android_app_test.EditTextLetter
+            android:id="@+id/textView_diary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.70"
+            android:textColor="#5e5e5e"
+            android:layout_margin="40dp"
+            android:hint="추억을 남기세요!."
+            android:gravity="center"
+            android:background="@null">
+        </com.sys2017.android_app_test.EditTextLetter>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_save"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@android:drawable/ic_menu_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"/>
+
+</RelativeLayout>
