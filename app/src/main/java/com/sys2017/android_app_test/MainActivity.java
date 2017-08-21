@@ -30,17 +30,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -158,12 +148,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewPager = (ViewPager)findViewById(R.id.pager);
 
+        viewPager.setOnPageChangeListener(onPageChangeListener);
+
         viewPager.setAdapter(fragment_adapter);
         tabLayout.setupWithViewPager(viewPager);
 
         getSupportActionBar().setTitle("");
-
-
 
     }
 
@@ -194,8 +184,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             Toast.makeText(this, absolutePath+"", Toast.LENGTH_SHORT).show();
-
-
 
         }
 
@@ -230,6 +218,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+            if ( position == 0 ){
+                if ( isFAB == true ){
+                    isFAB = false;
+                }
+                FAB_open.setFillAfter(true);
+                FAB_close.setFillAfter(true);
+                rotate_foward.setFillAfter(true);
+                rotate_backward.setFillAfter(true);
+                floatingActionButton.setVisibility(View.VISIBLE);
+            }
+
+            if ( position == 1 ){
+                FAB_open.setFillAfter(false);
+                FAB_close.setFillAfter(false);
+                rotate_foward.setFillAfter(false);
+                rotate_backward.setFillAfter(false);
+                floatingActionButton.setVisibility(View.GONE);
+                floatingActionButton01.setVisibility(View.GONE);
+                floatingActionButton02.setVisibility(View.GONE);
+            }
+
+            if ( position == 2 ) {
+                FAB_open.setFillAfter(false);
+                FAB_close.setFillAfter(false);
+                rotate_foward.setFillAfter(false);
+                rotate_backward.setFillAfter(false);
+                floatingActionButton.setVisibility(View.GONE);
+                floatingActionButton01.setVisibility(View.GONE);
+                floatingActionButton02.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -247,6 +282,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
             }
         }
+    }
+
+    public void BtnAdd(View v){
+        Log.e("로그","로그");
     }
 
 

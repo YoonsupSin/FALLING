@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sys2017.android_app_test.Intro2Activity"
+    android:src="@drawable/mjy_sys00">
+
+    <ImageView
+        android:id="@+id/imageView_confirm_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/mjy_sys00"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:id="@+id/linear00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2"
+        android:clickable="true">
+
+        <Button
+            android:id="@+id/button_Resist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/shap"
+            android:text="회원가입"
+            android:textSize="19dp"
+            android:textStyle="italic"
+            android:onClick="ResistMember"
+            android:clickable="true"/>
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/shap"
+            android:text="로그인"
+            android:textSize="19dp"
+            android:textStyle="italic"
+            android:onClick="LoginMember" />
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear00"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </android.support.v4.view.ViewPager>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_above="@id/linear00"
+        android:background="@color/colorAccent"
+        android:alpha="0.7"/>
+
+    <com.rd.PageIndicatorView
+        app:piv_viewPager="@id/viewPager_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:piv_animationType="slide"
+        android:layout_gravity="center|bottom"
+        app:piv_selectedColor="#ffffff"
+        app:piv_unselectedColor="#ffcece"
+        android:padding="10dp"
+        android:layout_above="@id/linear00"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

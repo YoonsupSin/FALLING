@@ -8,11 +8,13 @@ import java.io.Serializable;
 
 public class AlbumItem implements Serializable {
 
+    String id;
     String img;
     String memo;
     String date;
 
-    public AlbumItem(String imgUrl, String memo, String date) {
+    public AlbumItem(String id, String imgUrl, String memo, String date) {
+        this.id = id;
         this.img = imgUrl;
         this.memo = memo;
         this.date = date;
@@ -40,5 +42,13 @@ public class AlbumItem implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

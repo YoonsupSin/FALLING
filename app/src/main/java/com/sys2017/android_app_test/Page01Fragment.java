@@ -1,8 +1,11 @@
 package com.sys2017.android_app_test;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,13 +51,16 @@ public class Page01Fragment extends Fragment {
     TextView textView;
 
     String serverURL = "http://imgenius0136.dothome.co.kr/FALLING/loadDB.php";
+    SQLiteDatabase sqLiteDatabase;
+    String table = "AlbumItem";
+
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        albumItems.add(new AlbumItem("http://imgenius0136.dothome.co.kr/FALLING/photo.jpg","안녕","호이"));
+        albumItems.add(new AlbumItem("id","http://imgenius0136.dothome.co.kr/FALLING/photo.jpg","안녕","호이"));
 
         MyThread myThread = new MyThread();
         myThread.start();
@@ -75,12 +81,17 @@ public class Page01Fragment extends Fragment {
         month = calendar_current.get(Calendar.MONTH);
         day = calendar_current.get(Calendar.DAY_OF_MONTH);
 
-        MainActivity mainActivity = ((MainActivity)getActivity());
+        //MainActivity mainActivity = ((MainActivity)getActivity());
+        sqLiteDatabase = getContext().openOrCreateDatabase(table, Context.MODE_PRIVATE,null);
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+table+"("
+        +"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        +"img TEXT, "
+        +"memo TEXT, "
+        +"date TEXT, "
+        +"diary TEXT)");
 
-        if ( mainActivity.getIntent() != null ){
-            albumItems.add(new AlbumItem(mainActivity.getIntent().getStringExtra("img"),mainActivity.getIntent().getStringExtra("memo"),mainActivity.getIntent().getStringExtra("date")));
-            page01_adapter.notifyDataSetChanged();
-        }
+        //TODO
+
 
     }
 
@@ -105,16 +116,20 @@ public class Page01Fragment extends Fragment {
                     String[] row = line.split("&");
 
 
-                    if ( row.length == 3 ){
-                        String img = row[0];
-                        String memo = row[1];
-                        String date = row[2];
+                    if ( row.length == 4 ){
 
+                        String id = row[0];
+                        String img = row[1];
+                        String memo = row[2];
+                        String date = row[3];
+
+                        Log.e("img",id.toString());
                         Log.e("img",img);
                         Log.e("img",memo);
                         Log.e("img",date);
 
-                        albumItems.add(new AlbumItem(img,memo,date));
+
+                        albumItems.add(new AlbumItem(id,img,memo,date));
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -155,6 +170,8 @@ public class Page01Fragment extends Fragment {
 
         return view;
     }
+
+
 
 
 }

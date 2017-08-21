@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sys2017.android_app_test.Fragment_confirm_00">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/textView_confrim00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="둘만의 사진첩을 만들어보세요!"
+            android:layout_centerHorizontal="true"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

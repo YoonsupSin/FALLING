@@ -88,6 +88,7 @@ public class Page01_Adapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SecondActivity.class);
+                    intent.putExtra("id",albumItems.get(getLayoutPosition()).getId());
                     intent.putExtra("pic",albumItems.get(getLayoutPosition()).getImgUrl());
                     intent.putExtra("memo",albumItems.get(getLayoutPosition()).getMemo());
                     intent.putExtra("date",albumItems.get(getLayoutPosition()).getDate());

@@ -8,17 +8,17 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by N552VW on 2017-06-15.
  */
 
-public class Fragment_Adapter extends FragmentPagerAdapter {
+public class Fragment_Adapter2 extends FragmentPagerAdapter {
 
     Fragment[] fragments = new Fragment[3];
-    String[] title = new String[]{"앨범","러브레터","위시리스트"};
+    String[] title = new String[]{"보낸편지함","받은편지함","편지보내기"};
 
-    public Fragment_Adapter(FragmentManager fm) {
+    public Fragment_Adapter2(FragmentManager fm) {
         super(fm);
 
-        fragments[0] = new Page01Fragment();
-        fragments[1] = new Page02Fragment();
-        fragments[2] = new Page03Fragment();
+        fragments[0] = new Page02Fragment_Fragment01();
+        fragments[1] = new Page02Fragment_Fragment02();
+        fragments[2] = new Page02Fragment_Fragment03();
 
     }
 

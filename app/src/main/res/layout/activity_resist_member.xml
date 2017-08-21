@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sys2017.android_app_test.ResistMemberActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:layout_centerInParent="true">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/circular_imageView_profilePic"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/mjy_sys"
+            android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:weightSum="6"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="아이디 :"
+                    android:gravity="center"
+                    android:textSize="19dp"/>
+
+                <EditText
+                    android:id="@+id/editView_id"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:text="중복확인"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorAccent"
+                    android:layout_margin="5dp"
+                    android:onClick="CheckID"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="비밀번호 :"
+                    android:gravity="center"
+                    android:textSize="19dp"/>
+
+                <EditText
+                    android:id="@+id/editView_password"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:text="확인"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorAccent"
+                    android:layout_margin="5dp"
+                    android:onClick="CheckPASSWORD"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="이름 :"
+                    android:gravity="center"
+                    android:textSize="19dp"/>
+
+                <EditText
+                    android:id="@+id/editView_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="나이 :"
+                    android:gravity="center"
+                    android:textSize="19dp"/>
+
+                <EditText
+                    android:id="@+id/editView_age"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="성별 :"
+                    android:gravity="center"
+                    android:textSize="19dp"/>
+
+                <RadioGroup
+                    android:id="@+id/gerderRADIOGROUP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:layout_gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/radioMEN"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="MEN"
+                        />
+                    <RadioButton
+                        android:id="@+id/radioWOMEN"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="WOMEN"/>
+                    <RadioButton
+                        android:id="@+id/radioTRANS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TRANS"/>
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView_next"
+                android:layout_width="70dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                app:cardCornerRadius="30dp"
+                android:clickable="true"
+                android:backgroundTint="#ffcbcb"
+                android:onClick="ClickNext">
+
+                <TextView
+                    android:id="@+id/textView_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="next"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>

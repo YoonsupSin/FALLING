@@ -61,7 +61,7 @@
             android:layout_margin="40dp"/>
 
         <com.sys2017.android_app_test.EditTextLetter
-            android:id="@+id/textView_diary"
+            android:id="@+id/editTextLetter_diary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2.70"
