@@ -25,6 +25,7 @@
         <activity android:name=".AddMemory" />
         <activity android:name=".ResistMemberActivity" />
         <activity android:name=".Intro2Activity" />
+        <activity android:name=".WaitingActivity"></activity>
     </application>
 
 </manifest>

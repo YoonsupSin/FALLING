@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="200dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroup_alert"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="3">
+
+                <RadioButton
+                    android:id="@+id/radioButton_inputKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인증키를 입력할래요."/>
+
+                <RadioButton
+                    android:id="@+id/radioButton_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인증키를 생성할게요."/>
+
+            </RadioGroup>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/textView_alert"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="key"
+                android:textSize="30dp"
+                android:layout_centerInParent="true"/>
+
+            <EditText
+                android:id="@+id/editText_inputKey"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/gerderRADIOGROUP"
+                android:hint="인증키를 입력하세요."
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@null"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView_helper"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="연인의 핸드폰으로 키 인증을 마무리 하세요!"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:layout_weight="3"/>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

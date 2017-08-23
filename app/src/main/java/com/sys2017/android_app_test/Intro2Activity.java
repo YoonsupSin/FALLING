@@ -91,6 +91,4 @@ public class Intro2Activity extends AppCompatActivity {
 
 
 
-
-
 }
