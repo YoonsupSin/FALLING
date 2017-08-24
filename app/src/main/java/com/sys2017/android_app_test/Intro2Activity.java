@@ -50,21 +50,21 @@ public class Intro2Activity extends AppCompatActivity {
                     Animation animation = new AlphaAnimation(0,1);
                     animation.setDuration(500);
                     imageView_back.startAnimation(animation);
-                    imageView_back.setImageResource(R.drawable.back00);
+                    imageView_back.setImageResource(R.drawable.viewpage00);
                 }
 
                 if ( position == 1 ){
                     Animation animation = new AlphaAnimation(0,1);
                     animation.setDuration(500);
                     imageView_back.startAnimation(animation);
-                    imageView_back.setImageResource(R.drawable.back02);
+                    imageView_back.setImageResource(R.drawable.viewpage01);
                 }
 
                 if ( position == 2 ){
                     Animation animation = new AlphaAnimation(0,1);
                     animation.setDuration(500);
                     imageView_back.startAnimation(animation);
-                    imageView_back.setImageResource(R.drawable.back03);
+                    imageView_back.setImageResource(R.drawable.viewpage02);
                 }
             }
 
@@ -82,6 +82,7 @@ public class Intro2Activity extends AppCompatActivity {
     public void ResistMember(View v){
         Intent intent = new Intent(Intro2Activity.this,ResistMemberActivity.class);
         startActivity(intent);
+        finish();
     }
 
 

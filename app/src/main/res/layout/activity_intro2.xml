@@ -68,7 +68,7 @@
         android:layout_height="150dp"
         android:layout_above="@id/linear00"
         android:background="@color/colorAccent"
-        android:alpha="0.7"/>
+        android:alpha="0.4"/>
 
     <com.rd.PageIndicatorView
         app:piv_viewPager="@id/viewPager_confirm"

@@ -4,19 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.sys2017.android_app_test.Fragment_confirm_01">
 
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="100dp"
+        android:src="@drawable/letter"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_alignParentBottom="true">
 
         <TextView
+            android:layout_marginTop="20dp"
             android:id="@+id/textView_confrim01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="편지를 주고 받으세요"
             android:layout_centerHorizontal="true"
-            android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
 
     </RelativeLayout>
 

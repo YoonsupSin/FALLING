@@ -3,6 +3,7 @@ package com.sys2017.android_app_test;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.IdRes;
@@ -169,7 +170,6 @@ public class ResistMemberActivity extends AppCompatActivity {
                             editText_inputKey.setVisibility(View.GONE);
                             textView_alert.setVisibility(View.VISIBLE);
                             textView_alert.setText(arr2);
-
                         }
 
                         if ( group.getCheckedRadioButtonId() == R.id.radioButton_inputKey ){
@@ -195,63 +195,16 @@ public class ResistMemberActivity extends AppCompatActivity {
                         if ( radioGroup.getCheckedRadioButtonId() == R.id.radioButton_create ){
                             Toast.makeText(ResistMemberActivity.this, "인증키를 생성합니다.", Toast.LENGTH_SHORT).show();
 
-                            new Thread(){
-                                @Override
-                                public void run() {
-                                    try {
+                            SharedPreferences sharedPreferences = getSharedPreferences("serial",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("id",id);
+                            editor.putString("pass",pass);
+                            editor.putString("serial",arr2);
+                            editor.commit();
 
-                                        cnt = 0;
-
-                                        URL url = new URL(serverUrl);
-                                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                                        httpURLConnection.setRequestMethod("POST");
-                                        httpURLConnection.setDoInput(true);
-                                        httpURLConnection.setDoOutput(true);
-                                        httpURLConnection.setUseCaches(false);
-
-                                        InputStream inputStream = httpURLConnection.getInputStream();
-                                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                                        StringBuffer stringBuffer = new StringBuffer();
-                                        String line = bufferedReader.readLine();
-
-                                        while( line != null ){
-                                            Log.e("LINE",line);
-                                            if ( line.contains(arr2) ){
-                                                cnt++;
-                                            }
-                                            line = bufferedReader.readLine();
-
-                                        }
-
-                                        Log.e("CNT",cnt+"");
-
-                                        if ( cnt == 2 ){
-                                            Intent intent = new Intent(ResistMemberActivity.this,MainActivity.class);
-                                            intent.putExtra("serial",arr2);
-                                            startActivity(intent);
-                                        }else {
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast.makeText(ResistMemberActivity.this, "상대방에게 인증키를 알려주세요!", Toast.LENGTH_SHORT).show();
-
-                                                }
-                                            });
-
-                                            Intent intent = new Intent(ResistMemberActivity.this,WaitingActivity.class);
-                                            startActivity(intent);
-
-                                        }
-
-                                    } catch (MalformedURLException e) {
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.start();
+                            Intent intent = new Intent(ResistMemberActivity.this,WaitingActivity.class);
+                            intent.putExtra("serial",arr2);
+                            startActivity(intent);
 
                         }
 
@@ -275,7 +228,15 @@ public class ResistMemberActivity extends AppCompatActivity {
                             simpleMultiPartRequest.addStringParam("serial",editText_inputKey.getText().toString());
                             requestQueue.add(simpleMultiPartRequest);
 
+                            SharedPreferences sharedPreferences = getSharedPreferences("serial",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("id",id);
+                            editor.putString("pass",pass);
+                            editor.putString("serial",editText_inputKey.getText().toString());
+                            editor.commit();
+
                             Intent intent = new Intent(ResistMemberActivity.this,WaitingActivity.class);
+                            intent.putExtra("serial",editText_inputKey.getText().toString());
                             startActivity(intent);
 
                         }
@@ -378,6 +339,8 @@ public class ResistMemberActivity extends AppCompatActivity {
             arr[i] = randNum[random.nextInt(randNum.length)];
             arr2 += arr[i];
         }
+
+
 
         if ( stringBuffer.toString().contains(arr2) ){
             RandomNum();

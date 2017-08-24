@@ -4,19 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.sys2017.android_app_test.Fragment_confirm_00">
 
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="190dp"
+        android:src="@drawable/album"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_alignParentBottom="true">
 
         <TextView
+            android:layout_marginTop="20dp"
             android:id="@+id/textView_confrim00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="둘만의 사진첩을 만들어보세요!"
             android:layout_centerHorizontal="true"
-            android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
 
     </RelativeLayout>
 
