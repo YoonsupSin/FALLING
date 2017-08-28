@@ -23,5 +23,9 @@
         <item name="android:textColor">#ffff</item>
     </style>
 
+    <style name="dia"
+        parent="Theme.AppCompat.Light.Dialog.Alert"/>
+        />
+
 
 </resources>

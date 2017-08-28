@@ -1,5 +1,6 @@
 package com.sys2017.android_app_test;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,14 +17,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 /**
@@ -52,7 +62,7 @@ public class Page01Fragment extends Fragment {
 
     String serverURL = "http://imgenius0136.dothome.co.kr/FALLING/loadDB.php";
     SQLiteDatabase sqLiteDatabase;
-    String table = "AlbumItem";
+    String table;
 
 
 
@@ -60,12 +70,60 @@ public class Page01Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        albumItems.add(new AlbumItem("id","http://imgenius0136.dothome.co.kr/FALLING/photo.jpg","안녕","호이"));
+        table = ((MainActivity)getActivity()).table;
+        Log.e("테이블널",table);
 
-        MyThread myThread = new MyThread();
-        myThread.start();
+        page01_adapter = new Page01_Adapter(albumItems,getActivity());
+//        page01_adapter = new Page01_Adapter(albumItems,getContext());
 
-        page01_adapter = new Page01_Adapter(albumItems,getContext());
+        if ( table != null ){
+            Log.e("쓰레드","스타트");
+            //volley
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, serverURL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.e("성공","성공"+response);
+
+                    String[] rows=response.split(";");
+                    for(String s: rows){
+                        String[] row=s.split("&");
+
+                        Log.i("ROW", row.length+"  :  "+Arrays.toString(row));
+
+                        if ( row.length == 4 ){
+
+                            String id = row[0];
+                            String img = row[1];
+                            String memo = row[2];
+                            String date = row[3];
+
+                            Log.e("img",id.toString());
+                            Log.e("img",img);
+                            Log.e("img",memo);
+                            Log.e("img",date);
+
+                            albumItems.add(new AlbumItem(id,img,memo,date));
+                            page01_adapter.notifyDataSetChanged();
+                            recyclerView.scrollToPosition(page01_adapter.getItemCount()-1);
+                        }
+
+                    }
+
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("에러","에러");
+                }
+            });
+
+            simpleMultiPartRequest.addStringParam("table",table);
+            requestQueue.add(simpleMultiPartRequest);
+        }
 
         Calendar calendar_start = Calendar.getInstance();   //시작하고 싶은 날짜!
         calendar_start.set(start_Year,start_Month-1,start_Day);
@@ -82,16 +140,13 @@ public class Page01Fragment extends Fragment {
         day = calendar_current.get(Calendar.DAY_OF_MONTH);
 
         //MainActivity mainActivity = ((MainActivity)getActivity());
-        sqLiteDatabase = getContext().openOrCreateDatabase(table, Context.MODE_PRIVATE,null);
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+table+"("
-        +"id INTEGER PRIMARY KEY AUTOINCREMENT,"
-        +"img TEXT, "
-        +"memo TEXT, "
-        +"date TEXT, "
-        +"diary TEXT)");
-
-        //TODO
-
+//        sqLiteDatabase = getContext().openOrCreateDatabase(table, Context.MODE_PRIVATE,null);
+//        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+table+"("
+//        +"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+//        +"img TEXT, "
+//        +"memo TEXT, "
+//        +"date TEXT, "
+//        +"diary TEXT)");
 
     }
 
@@ -103,6 +158,7 @@ public class Page01Fragment extends Fragment {
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
                 httpURLConnection.setUseCaches(false);
 
                 InputStream inputStream = url.openStream();
@@ -110,36 +166,45 @@ public class Page01Fragment extends Fragment {
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
                 String line = bufferedReader.readLine();
-                albumItems.clear();
+                StringBuffer stringBuffer = new StringBuffer();
+                //albumItems.clear();
+                Log.e("와일",line);
+                String[] arr = null;
 
                 while (line!=null){
-                    String[] row = line.split("&");
 
+                    arr = line.split("&");
 
-                    if ( row.length == 4 ){
-
-                        String id = row[0];
-                        String img = row[1];
-                        String memo = row[2];
-                        String date = row[3];
-
-                        Log.e("img",id.toString());
-                        Log.e("img",img);
-                        Log.e("img",memo);
-                        Log.e("img",date);
-
-
-                        albumItems.add(new AlbumItem(id,img,memo,date));
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                page01_adapter.notifyDataSetChanged();
-                                recyclerView.scrollToPosition(page01_adapter.getItemCount()-1);
-                            }
-                        });
-                    }
-                    line = bufferedReader.readLine();
                 }
+
+                Log.e("배열", Arrays.toString(arr)+"입니다");
+
+
+//                Log.e("와일",line);
+//                String[] row = line.split(";");
+//
+//                if ( row.length == 4 ){
+//
+//                    String id = row[0];
+//                    String img = row[1];
+//                    String memo = row[2];
+//                    String date = row[3];
+//
+//                    Log.e("img",id.toString());
+//                    Log.e("img",img);
+//                    Log.e("img",memo);
+//                    Log.e("img",date);
+//
+//                    albumItems.add(new AlbumItem(id,img,memo,date));
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            page01_adapter.notifyDataSetChanged();
+//                            recyclerView.scrollToPosition(page01_adapter.getItemCount()-1);
+//                        }
+//                    });
+//                }
+//                line = bufferedReader.readLine();
 
 
             } catch (MalformedURLException e) {
@@ -158,12 +223,17 @@ public class Page01Fragment extends Fragment {
         View view = inflater.inflate(R.layout.page01_fragment,container,false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        page01_adapter = new Page01_Adapter(albumItems,getActivity());
+
         recyclerView.setAdapter(page01_adapter);
+
 
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         recyclerView.setLayoutManager(linearLayoutManager);
+
+
 
         textView = (TextView)view.findViewById(R.id.textView_fragment01_dday);
         textView.setText(result+"♥");

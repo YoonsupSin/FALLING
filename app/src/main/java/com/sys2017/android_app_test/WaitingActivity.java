@@ -27,6 +27,8 @@ public class WaitingActivity extends AppCompatActivity {
     String serverUrl = "http://imgenius0136.dothome.co.kr/FALLING/loadDB_profile.php";
     String createUrl = "http://imgenius0136.dothome.co.kr/FALLING/createTable.php";
     int cnt = 0;
+
+    String table;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,10 @@ public class WaitingActivity extends AppCompatActivity {
 
             Log.e("진행상황","1");
 
+            Intent intent = getIntent();
+            table = intent.getStringExtra("serial");
+            Log.e("시리얼",table);
+
             try {
                 URL url = new URL(serverUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -74,7 +80,7 @@ public class WaitingActivity extends AppCompatActivity {
 
                 while ( line != null ){
                     Log.e("진행상황","2.5");
-                    if ( line.contains(getIntent().getStringExtra("serial")) ){
+                    if ( line.contains(table) ){
                         cnt++;
                     }
                     if ( cnt == 2 ){
@@ -104,9 +110,9 @@ public class WaitingActivity extends AppCompatActivity {
                     simpleMultiPartRequest.addStringParam("table_name",getIntent().getStringExtra("serial"));
                     requestQueue.add(simpleMultiPartRequest);
 
-                    Intent intent = new Intent(WaitingActivity.this,MainActivity.class);
-                    intent.putExtra("serial",getIntent().getStringExtra("serial"));
-                    startActivity(intent);
+                    Intent intent2 = new Intent(WaitingActivity.this,MainActivity.class);
+                    intent2.putExtra("serial",table);
+                    startActivity(intent2);
 
                 }
 

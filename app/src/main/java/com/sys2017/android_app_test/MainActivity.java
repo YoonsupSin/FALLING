@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final int PICK_FROM_ALBUM = 1;
 
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences2;
     SharedPreferences.Editor editor;
 
     String serverUrl = "http://imgenius0136.dothome.co.kr/imageUpload.php";
@@ -64,6 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     final int TIME_OUT = 20;
     final String POST_METHOD = "POST";
+
+    String table;
+    String wish;
+    String date;
+    String memo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +93,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         collapsing_image = (ImageView)findViewById(R.id.collapsing_image);
 
         sharedPreferences= getSharedPreferences("datas", MODE_PRIVATE);
+        sharedPreferences2 = getSharedPreferences("serial",MODE_PRIVATE);
 
         String t_img=sharedPreferences.getString("title_image", "empty");
+        table = sharedPreferences2.getString("serial","empty");
 
+        Log.e("테이블",table);
 
         if ( !t_img.equals("empty") ){
             Uri uri= Uri.parse(t_img);
@@ -138,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
 
                 Intent intent2 = new Intent(MainActivity.this,AddMemory.class);
+                intent2.putExtra("table",table);
                 startActivity(intent2);
 
             }
@@ -186,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, absolutePath+"", Toast.LENGTH_SHORT).show();
 
         }
-
     }
 
 

@@ -25,7 +25,9 @@
         <activity android:name=".AddMemory" />
         <activity android:name=".ResistMemberActivity" />
         <activity android:name=".Intro2Activity" />
-        <activity android:name=".WaitingActivity"></activity>
+        <activity android:name=".WaitingActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".WishActivity" android:theme="@style/dia"></activity>
     </application>
 
 </manifest>

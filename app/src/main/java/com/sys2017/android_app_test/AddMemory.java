@@ -53,6 +53,8 @@ public class AddMemory extends AppCompatActivity{
     String absolutePath = null;
 
     String saveDB = "http://imgenius0136.dothome.co.kr/FALLING/"+"saveDB.php";
+    Intent intent;
+    String table;
 //    String saveIMAGE = "http://imgenius0136.dothome.co.kr/FALLING/imageUpload.php";
 
     @Override
@@ -60,6 +62,9 @@ public class AddMemory extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memory);
 
+        intent = getIntent();
+        table = intent.getStringExtra("table");
+        Log.e("테이블",table);
         imageView = ( ImageView ) findViewById(R.id.imageView_Pic);
         editText = ( EditText ) findViewById(R.id.editText_memo);
         floatingActionButton =( FloatingActionButton ) findViewById(R.id.floating_OK);
@@ -88,6 +93,7 @@ public class AddMemory extends AppCompatActivity{
                 String date = calendar_current.get(Calendar.YEAR)+"년-"+calendar_current.get(Calendar.MONTH)+"월-"+calendar_current.get(Calendar.DATE)+"일";
 
                 simpleMultiPartRequest.addFile("upload",absolutePath);
+                simpleMultiPartRequest.addStringParam("table",table);
                 simpleMultiPartRequest.addStringParam("img","http://imgenius0136.dothome.co.kr/FALLING/"+Uri.parse(absolutePath).getLastPathSegment());
                 simpleMultiPartRequest.addStringParam("memo",editText.getText().toString());
                 simpleMultiPartRequest.addStringParam("date",date);
@@ -99,6 +105,7 @@ public class AddMemory extends AppCompatActivity{
                 intent1.putExtra("img","http://imgenius0136.dothome.co.kr/FALLING/"+Uri.parse(absolutePath).getLastPathSegment());
                 intent1.putExtra("memo",editText.getText().toString());
                 intent1.putExtra("date",date);
+
                 startActivity(intent1);
             }
         });
